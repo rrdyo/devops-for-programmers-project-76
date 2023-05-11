@@ -1,0 +1,29 @@
+- hosts: all
+
+  become: true
+  become_method: sudo
+  
+  tasks:
+    - name: pip
+      import_role:
+        name: geerlingguy.pip
+    
+    - name: Docker
+      import_role:
+        name: geerlingguy.docker
+
+    - pip:
+        name: docker
+
+    - community.docker.docker_container:
+        name: redmine
+        image: redmine
+        restart_policy: always
+        state: started
+        ports:
+          - 3000:3000
+        env:
+          NODE_ENV: production
+          REDMINE_HTTPS: "true"
+        networks:
+          - name: my_network
