@@ -4,6 +4,15 @@
   become_method: sudo
   
   tasks:
+    - name: Install pip
+      ansible.builtin.get_url:
+        url: https://bootstrap.pypa.io/get-pip.py
+        dest: /tmp/get-pip.py
+
+    - name: Install pip
+      ansible.builtin.command:
+        cmd: python3 /tmp/get-pip.py
+  
     - name: install pip docker
       ansible.builtin.pip:
         name: docker
@@ -11,6 +20,11 @@
     - name: add network
       community.docker.docker_network:
         name: my_network
+    
+    - name: Create directory for Redmine
+      ansible.builtin.file:
+        path: /path/to/redmine
+        state: directory
     
     - name: Create .env file from template
       ansible.builtin.template:
