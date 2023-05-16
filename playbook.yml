@@ -4,10 +4,47 @@
   become_method: sudo
   
   tasks:
-    - name: pip
-      import_role:
-        name: geerlingguy.pip
+    - name: install pip docker
+      ansible.builtin.pip:
+        name: docker
+
+    - name: add network
+      community.docker.docker_network:
+        name: my_network
     
-    - name: Docker
-      import_role:
-        name: geerlingguy.docker
+    - name: Create .env file from template
+      ansible.builtin.template:
+        src: templates/env_template.j2
+        dest: /path/to/redmine/.env
+    
+    - name: create docker nginx
+      community.docker.docker_container:
+        name: nginx-proxy
+        image: nginx
+        restart_policy: always
+        state: started
+        ports:
+          - 80:80
+          - 443:443
+        volumes:
+          - /project/code/:/etc/nginx/conf.d/
+          - /srv/docker/redmine/redmine/certs:/etc/nginx/certs
+        networks:
+          - name: my_network
+
+    - name: create docker redmine 
+      community.docker.docker_container:
+        name: redmine
+        image: redmine
+        restart_policy: always
+        state: started
+        ports:
+          - 3000:3000
+        env_file: /path/to/redmine/.env
+        networks:
+          - name: my_network
+- hosts: webservers
+  become: true
+  name: Run datadog agent
+  roles: 
+    - role: datadog.datadog
