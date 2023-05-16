@@ -4,15 +4,6 @@
   become_method: sudo
   
   tasks:
-    - name: Install pip
-      ansible.builtin.get_url:
-        url: https://bootstrap.pypa.io/get-pip.py
-        dest: /tmp/get-pip.py
-
-    - name: Install pip
-      ansible.builtin.command:
-        cmd: python3 /tmp/get-pip.py
-  
     - name: install pip docker
       ansible.builtin.pip:
         name: docker
