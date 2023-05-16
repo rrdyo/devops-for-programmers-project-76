@@ -12,11 +12,6 @@
       community.docker.docker_network:
         name: my_network
     
-    - name: Create directory for Redmine
-      ansible.builtin.file:
-        path: /path/to/redmine
-        state: directory
-    
     - name: Create .env file from template
       ansible.builtin.template:
         src: templates/env_template.j2
