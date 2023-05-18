@@ -33,7 +33,7 @@
           - 443:443
         volumes:
           - /project/code/:/etc/nginx/conf.d/
-          - /srv/docker/redmine/redmine/certs:/etc/nginx/certs
+          - /srv/cert:/etc/nginx/certs
         networks:
           - name: my_network
 
