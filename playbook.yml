@@ -17,8 +17,6 @@
         path: /path/to/redmine
         state: directory
         mode: "0755"
-        owner: rrdyo
-        group: rrdyo
     
     - name: Create .env file from template
       ansible.builtin.template:
