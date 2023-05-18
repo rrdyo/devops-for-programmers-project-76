@@ -4,7 +4,7 @@
   become_method: sudo
   
   tasks:
-    - name: install pip docker
+    - name: install docker
       ansible.builtin.pip:
         name: docker
 
@@ -22,7 +22,7 @@
         src: templates/env_template.j2
         dest: /path/to/redmine/.env
     
-    - name: create docker nginx
+    - name: create nginx
       community.docker.docker_container:
         name: nginx-proxy
         image: nginx
@@ -37,7 +37,7 @@
         networks:
           - name: my_network
 
-    - name: create docker redmine 
+    - name: create redmine 
       community.docker.docker_container:
         name: redmine
         image: redmine
