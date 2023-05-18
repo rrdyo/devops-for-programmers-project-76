@@ -1,12 +1,12 @@
 - hosts: all
-
   become: true
   become_method: sudo
   
   tasks:
     - name: install docker
-      ansible.builtin.pip:
-        name: docker
+      apt:
+        name: docker.io
+        state: present
 
     - name: add network
       community.docker.docker_network:
@@ -52,6 +52,5 @@
           - name: my_network
 - hosts: webservers
   become: true
-  name: Run datadog agent
   roles: 
     - role: datadog.datadog
