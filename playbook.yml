@@ -16,11 +16,15 @@
       ansible.builtin.file:
         path: /path/to/redmine
         state: directory
+        mode: "0755"
+        owner: rrdyo
+        group: rrdyo
     
     - name: Create .env file from template
       ansible.builtin.template:
         src: templates/env_template.j2
         dest: /path/to/redmine/.env
+        mode: "0644" 
     
     - name: create nginx
       community.docker.docker_container:
