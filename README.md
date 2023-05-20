@@ -6,6 +6,6 @@
 - ___make encrypt_vault___ - encrypt vault.yml
 - ___make decrypt_vault___ - decrypt ault.yml
 
-#LINK#
+#LINK. https на yandex cloud не завелся#
 
 http://project2.dyo-digital.ru
