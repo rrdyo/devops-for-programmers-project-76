@@ -50,5 +50,7 @@
         env_file: /path/to/redmine/.env
         networks:
           - name: my_network
+- hosts: webservers
+  become: true
   roles: 
     - role: datadog.datadog
