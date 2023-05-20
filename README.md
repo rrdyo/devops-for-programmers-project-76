@@ -8,4 +8,4 @@
 
 #LINK#
 
-http://project2.dyo-digital.ru
+https://project2.dyo-digital.ru
